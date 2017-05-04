@@ -7,14 +7,25 @@ class App extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			username: undefined,
-			password: undefined
+			username: '',
+			password: ''
 		}
 	}
+
+	handleInputChange(event) {
+  	const target = event.target;
+    const value = target.value;
+    const name = target.name;		
+
+		this.setState({
+			[name]: value
+		})
+	}
+
   render() {
 	const { isAuthenticated } = this.props
 	const { username, password } = this.state
-	const id = 'abcd123'
+	const cancellationToken = 'abcd123'
 		return (
       <div className="App">
 				IsAuthenticated: { isAuthenticated === true ? 'true' : 'false' }
@@ -29,8 +40,8 @@ class App extends Component {
 						</div>
 						<br />
 						<div>
-							<input type='text' placeholder='username' value={username} onChange={(event) => this.setState({ username: event.target.value })}/><br />
-							<input type='text' placeholder='password' value={password} onChange={(event) => this.setState({ password: event.target.value })}/><br />
+							<input type='text' name='username' placeholder='username' value={username} onChange={e => this.handleInputChange(e)}/><br />
+							<input type='text' name='password' placeholder='password' value={password} onChange={e => this.handleInputChange(e)}/><br />
 							<button onClick={() => action('LOCAL_LOGIN', { payload: {
 								'Username': username,
 								'Password': password
@@ -39,8 +50,8 @@ class App extends Component {
 					</div>}
 				<br/>
 				<button onClick={() => action('FETCH_DATA', { model: 'test'})}>Fetch Data</button>
-				<button onClick={() => action('FETCH_DATA_RECURRING', {	model: 'test2',	id, period: 500 })}>Fetch Data Recurring (500ms)</button>
-				<button onClick={() => action('FETCH_DATA_CANCEL', { id })}>Cancel Recurring Fetch</button>
+				<button onClick={() => action('FETCH_DATA_RECURRING', {	model: 'test2',	cancellationToken, period: 500 })}>Fetch Data Recurring (500ms)</button>
+				<button onClick={() => action('FETCH_DATA_CANCEL', { cancellationToken })}>Cancel Recurring Fetch</button>
 				<button onClick={() => {
 						for (var i = 0; i < 100; i++) {
 							action('FETCH_DATA_LATEST', { model: 'test3' })
