@@ -25,7 +25,6 @@ class App extends Component {
   render() {
 	const { isAuthenticated } = this.props
 	const { username, password } = this.state
-	const cancellationToken = 'abcd123'
 		return (
       <div className="App">
 				IsAuthenticated: { isAuthenticated === true ? 'true' : 'false' }
@@ -49,12 +48,12 @@ class App extends Component {
 						</div>
 					</div>}
 				<br/>
-				<button onClick={() => action('FETCH_DATA', { model: 'test'})}>Fetch Data</button>
-				<button onClick={() => action('FETCH_DATA_RECURRING', {	model: 'test2',	cancellationToken, period: 500 })}>Fetch Data Recurring (500ms)</button>
-				<button onClick={() => action('FETCH_DATA_CANCEL', { cancellationToken })}>Cancel Recurring Fetch</button>
+				<button onClick={() => action('FETCH_DATA', { modelName: 'test'})}>Fetch Data</button>
+				<button onClick={() => action('FETCH_DATA_RECURRING', {	modelName: 'test2',	taskId: 'abc', period: 500 })}>Fetch Data Recurring (500ms)</button>
+				<button onClick={() => action('FETCH_DATA_CANCEL', { taskId: 'abc' })}>Cancel Recurring Fetch</button>
 				<button onClick={() => {
 						for (var i = 0; i < 100; i++) {
-							action('FETCH_DATA_LATEST', { model: 'test3' })
+							action('FETCH_DATA_LATEST', { modelName: 'test3' })
 						}
 					}}>Fetch Data Latest</button>
       </div>
