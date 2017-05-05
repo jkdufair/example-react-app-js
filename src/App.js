@@ -59,6 +59,8 @@ class App extends Component {
 							action(netActions.DATA_REQUESTED_USE_LATEST, { modelName: 'test3' })
 						}
 					}}>Fetch Data Latest</button>
+				<br />
+				<button onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'userInfo'})}>Fetch User Info</button>
       </div>
     );
   }
