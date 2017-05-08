@@ -1,6 +1,9 @@
 const apis = {
 				publicData: {
-					path: 'https://httpbin.org/ip'
+					path: 'https://httpbin.org/get',
+					queryParams: {
+						foo: 'bar'
+					}
 				}
 			}
 

@@ -32,10 +32,13 @@ class App extends Component {
       <div className="App">
 				IsAuthenticated: { isAuthenticated === true ? 'true' : 'false' }
 				<br />
-				<button onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData'})}>Fetch Public Data</button>
-				<button onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', timeLimit: 10})}>
+				<button onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData' })}>Fetch Public Data</button>
+				<button onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', timeLimit: 10 })}>
 					Fetch Public Data (10ms time limit)
 				</button>
+				<button onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', queryParams: { baz: 'quux' } })}>Fetch Public with Query Param Passed</button>
+				<button onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', queryParams: { foo: 'wawa' } })}>Fetch Public with Query Param Merged</button>				
+				<br />
 				<button onClick={() => action(netActions.PERIODIC_DATA_REQUESTED, {	modelName: 'publicData',	taskId: 'abc', period: 500 })}>Fetch Public Data Recurring (500ms)</button>
 				<button onClick={() => action(netActions.PERIODIC_TERMINATION_REQUESTED, { taskId: 'abc' })}>Cancel Recurring Fetch</button>
 				<button onClick={() => {
