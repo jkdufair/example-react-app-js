@@ -61,6 +61,7 @@ class App extends Component {
 					<button onClick={() => action(authActions.LOG_OUT_REQUESTED)}>Log Out</button> :
 					<div>
 						<div>
+							<button onClick={() => window.location = 'https://www.purdue.edu/apps/account/cas/login?service=http%3A%2F%2Flocalhost:3000'}>CAS Login</button>
 							<button onClick={() => action(authActions.SHIB_LOGIN_REQUESTED)}>Shibboleth Login</button>
 							<button onClick={() => action(authActions.FACEBOOK_LOGIN_REQUESTED)}>Facebook Login</button>
 						</div>

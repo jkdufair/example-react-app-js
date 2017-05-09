@@ -6,6 +6,8 @@ import { createStore,	applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { actions as authActions } from 'studiokit-auth-js'
+
 
 import reducer from './reducers'
 import rootSaga from './sagas'
@@ -21,6 +23,15 @@ sagaMiddleware.run(rootSaga)
 export function action(type, payload) {
 	store.dispatch(Object.assign({}, { type	}, payload))
 }
+
+const match = window.location.href.match(/ticket=(.*)&?/)
+if (match && match.length > 1) {
+	const ticket = match[1]
+	action(authActions.CAS_LOGIN_REQUESTED, { payload: ticket })
+	// TODO: remove ticket query param
+	// TODO: deploy to somewhere we can test this!
+}
+
 
 ReactDOM.render(
 	<Provider store={ store }	key="provider">
