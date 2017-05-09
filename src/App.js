@@ -10,8 +10,10 @@ class App extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			username: '',
-			password: ''
+			localUsername: '',
+			localPassword: '',
+			headlessCasUsername: '',
+			headlessCasPassword: ''
 		}
 	}
 
@@ -27,7 +29,7 @@ class App extends Component {
 
   render() {
 	const { isAuthenticated, publicData, userInfo } = this.props
-	const { username, password } = this.state
+	const { localUsername, localPassword, headlessCasUsername, headlessCasPassword } = this.state
 		return (
       <div className="App">
 				IsAuthenticated: { isAuthenticated === true ? 'true' : 'false' }
@@ -59,17 +61,25 @@ class App extends Component {
 					<button onClick={() => action(authActions.LOG_OUT_REQUESTED)}>Log Out</button> :
 					<div>
 						<div>
-							<button onClick={() => action(authActions.CAS_LOGIN_REQUESTED)}>CAS Login</button>
 							<button onClick={() => action(authActions.SHIB_LOGIN_REQUESTED)}>Shibboleth Login</button>
 							<button onClick={() => action(authActions.FACEBOOK_LOGIN_REQUESTED)}>Facebook Login</button>
 						</div>
 						<br />
 						<div>
-							<input type='text' name='username' placeholder='username' value={username} onChange={e => this.handleInputChange(e)}/><br />
-							<input type='text' name='password' placeholder='password' value={password} onChange={e => this.handleInputChange(e)}/><br />
+							<input type='text' name='casUsername' placeholder='CAS username' value={headlessCasUsername} onChange={e => this.handleInputChange(e)}/><br />
+							<input type='password' name='casPassword' placeholder='CAS password' value={headlessCasPassword} onChange={e => this.handleInputChange(e)}/><br />
+							<button onClick={() => action(authActions.HEADLESS_CAS_LOGIN_REQUESTED, { payload: {
+								'Username': headlessCasUsername,
+								'Password': headlessCasPassword
+								}})}>"Headless" CAS Login</button>
+						</div>
+						<br />
+						<div>
+							<input type='text' name='localUsername' placeholder='local username' value={localUsername} onChange={e => this.handleInputChange(e)}/><br />
+							<input type='password' name='localPassword' placeholder='local password' value={localPassword} onChange={e => this.handleInputChange(e)}/><br />
 							<button onClick={() => action(authActions.LOCAL_LOGIN_REQUESTED, { payload: {
-								'Username': username,
-								'Password': password
+								'Username': localUsername,
+								'Password': localPassword
 							}})}>Local Login</button>
 						</div>
 					</div>}
