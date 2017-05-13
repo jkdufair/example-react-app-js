@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
-import { Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card'
+import { Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import Snackbar from 'material-ui/Snackbar'
 import CircularProgress from 'material-ui/CircularProgress'
 import { action } from '../index'
 
 import './shared.css'
-import { paperStyle } from './muiSharedStyles'
+import { paperStyle, padCircularProgress } from './muiSharedStyles'
 
 const spacedCard = {
 	margin: '1rem 0'
@@ -64,7 +64,9 @@ class Authenticated extends Component {
 									<FlatButton
 										onClick={() => window.location = 'https://www.purdue.edu/apps/account/cas/login?service=http%3A%2F%2Flocalhost:3000'}
 										label='Log In'
-										primary={true} />
+										primary={true}
+										disabled={auth.isAuthenticating}
+										/>
 								</CardActions>
 							</Card>
 							{/*<button onClick={() => action(authActions.SHIB_LOGIN_REQUESTED)}>Shibboleth Login</button>
@@ -86,7 +88,7 @@ class Authenticated extends Component {
 								</CardText>
 								<CardActions>
 									{auth.isAuthenticating && whichLoginButtonClicked === 'cas' ?
-										<CircularProgress size={30}/>
+										<CircularProgress size={30} style={padCircularProgress} />
 									:
 										<FlatButton
 											onClick={() => {
@@ -97,7 +99,9 @@ class Authenticated extends Component {
 												this.setState({whichLoginButtonClicked: 'cas'})
 											}}
 											label='Log In'
-											primary={true} />
+											primary={true}
+											disabled={auth.isAuthenticating}
+										/>
 									}
 								</CardActions>
 							</Card>
@@ -117,7 +121,7 @@ class Authenticated extends Component {
 								</CardText>
 								<CardActions>
 									{auth.isAuthenticating && whichLoginButtonClicked === 'local' ?
-										<CircularProgress size={30}/>									
+										<CircularProgress size={30} style={padCircularProgress} />									
 									:
 										<FlatButton
 											onClick={() => {
@@ -128,7 +132,9 @@ class Authenticated extends Component {
 												this.setState({whichLoginButtonClicked: 'local'})
 											}}
 											label='Local Login'
-											primary={true} />
+											primary={true}
+											disabled={auth.isAuthenticating}
+										/>
 									}
 									</CardActions>
 							</Card>

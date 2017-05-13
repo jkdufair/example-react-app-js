@@ -7,4 +7,8 @@ const paperStyle = {
   display: 'inline-block'
 };
 
-export { paperStyle }
+const padCircularProgress = {
+	paddingLeft: '0.5rem'
+}
+
+export { paperStyle, padCircularProgress }
