@@ -17,12 +17,13 @@ cache:
   paths:
   - node_modules/
 
-test_async:
+pages:
+  stage: deploy
   script:
-   - npm install
-   - node ./specs/start.js ./specs/async.spec.js
-
-test_db:
-  script:
-   - npm install
-   - node ./specs/start.js ./specs/db-postgres.spec.js
+  - npm install
+  - npm run build
+  artifacts:
+    paths:
+    - build
+  only:
+  - develop
