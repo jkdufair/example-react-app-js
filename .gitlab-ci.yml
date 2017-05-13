@@ -1,11 +1,9 @@
 pages:
   stage: deploy
   script:
-  - mkdir .public
-  - cp -r * .public
-  - mv .public public
+  - yarn build
   artifacts:
     paths:
-    - public
+    - build
   only:
-  - master
+  - develop
