@@ -1,0 +1,24 @@
+.flex-container {
+	display: flex;
+	margin-top: 1rem;
+	margin-left: 1rem;
+}
+
+#left-panel {
+	flex: 0 0 30%;
+}
+
+#right-panel {
+	flex: 0 0 70%;
+	padding-left: 1rem;
+	overflow: hidden;
+}
+
+#right-panel pre {
+	overflow: hidden;
+}
+
+.flex-vertical {
+	display: flex;
+	flex-direction: column;
+}
