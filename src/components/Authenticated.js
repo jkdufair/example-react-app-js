@@ -6,21 +6,15 @@ import FlatButton from 'material-ui/FlatButton'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card'
+import Snackbar from 'material-ui/Snackbar'
+import CircularProgress from 'material-ui/CircularProgress'
 import { action } from '../index'
 
 import './shared.css'
+import { paperStyle } from './muiSharedStyles'
 
 const spacedCard = {
 	margin: '1rem 0'
-}
-
-const paperStyle = {
-	width: '95%',
-	maxWidth: '95%',
-	height: '90%',
-	paddingLeft: '1rem',
-  textAlign: 'left',
-  display: 'inline-block'
 }
 
 class Authenticated extends Component {
@@ -30,7 +24,14 @@ class Authenticated extends Component {
 			localUsername: '',
 			localPassword: '',
 			headlessCasUsername: '',
-			headlessCasPassword: ''
+			headlessCasPassword: '',
+			whichLoginButtonClicked: undefined
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.auth.isAuthenticated) {
+			this.setState({whichLoginButtonClicked: undefined})
 		}
 	}
 
@@ -45,12 +46,12 @@ class Authenticated extends Component {
 	}
 	
 	render () {
-		const { isAuthenticated, userInfo } = this.props
-		const { localUsername, localPassword, headlessCasUsername, headlessCasPassword } = this.state
+		const { auth, userInfo } = this.props
+		const { localUsername, localPassword, headlessCasUsername, headlessCasPassword, whichLoginButtonClicked } = this.state
 		return (
 			<div className='flex-container'>
 				<div id='left-panel'>
-					{isAuthenticated ?
+					{auth.isAuthenticated ?
 						<FlatButton
 							onClick={() => action(authActions.LOG_OUT_REQUESTED)}
 							label='Log Out'
@@ -84,13 +85,20 @@ class Authenticated extends Component {
 										onChange={e => this.handleInputChange(e)} />
 								</CardText>
 								<CardActions>
-									<FlatButton
-										onClick={() => action(authActions.HEADLESS_CAS_LOGIN_REQUESTED, { payload: {
-											'Username': headlessCasUsername,
-											'Password': headlessCasPassword
-										}})}
-										label='Log In'
-										primary={true} />
+									{auth.isAuthenticating && whichLoginButtonClicked === 'cas' ?
+										<CircularProgress size={30}/>
+									:
+										<FlatButton
+											onClick={() => {
+												action(authActions.HEADLESS_CAS_LOGIN_REQUESTED, { payload: {
+													'Username': headlessCasUsername,
+													'Password': headlessCasPassword
+												}})
+												this.setState({whichLoginButtonClicked: 'cas'})
+											}}
+											label='Log In'
+											primary={true} />
+									}
 								</CardActions>
 							</Card>
 							<Card>
@@ -108,19 +116,26 @@ class Authenticated extends Component {
 										value={localPassword} onChange={e => this.handleInputChange(e)} />
 								</CardText>
 								<CardActions>
-									<FlatButton
-										onClick={() => action(authActions.LOCAL_LOGIN_REQUESTED, { payload: {
-											'Username': localUsername,
-											'Password': localPassword
-										}})}
-										label='Local Login'
-										primary={true} />
+									{auth.isAuthenticating && whichLoginButtonClicked === 'local' ?
+										<CircularProgress size={30}/>									
+									:
+										<FlatButton
+											onClick={() => {
+												action(authActions.LOCAL_LOGIN_REQUESTED, { payload: {
+													'Username': localUsername,
+													'Password': localPassword
+												}})
+												this.setState({whichLoginButtonClicked: 'local'})
+											}}
+											label='Local Login'
+											primary={true} />
+									}
 									</CardActions>
 							</Card>
 						</div>}					
 				</div>
 				<div id='right-panel'>
-					{isAuthenticated &&
+					{auth.isAuthenticated &&
 					<div>
 						<FlatButton
 							onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'user.userInfo'})}
@@ -135,6 +150,10 @@ class Authenticated extends Component {
 						</Paper>
 					</div>}
 				</div>
+				<Snackbar
+          open={auth && auth.didFail}
+          message="There was a problem logging in. Please try again."
+          autoHideDuration={4000} />
 			</div>
 		)
 	}
@@ -142,7 +161,7 @@ class Authenticated extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		isAuthenticated: state.auth.isAuthenticated,
+		auth: state.auth,
 		userInfo: state.models.user !== undefined ? state.models.user.userInfo : undefined,
 	};
 };

@@ -6,15 +6,7 @@ import Paper from 'material-ui/Paper'
 import { action } from '../index'
 
 import './shared.css'
-
-const paperStyle = {
-	width: '95%',
-	maxWidth: '95%',
-	height: '90%',
-	paddingLeft: '1rem',
-  textAlign: 'left',
-  display: 'inline-block'
-};
+import { paperStyle } from './muiSharedStyles'
 
 class Public extends Component {
 	constructor(props) {
@@ -66,10 +58,10 @@ class Public extends Component {
 						<FlatButton
 							onClick={() => {
 								for (var i = 0; i < 100; i++) {
-									action(netActions.DATA_REQUESTED_USE_LATEST, { modelName: 'publicData' })
+									action(netActions.DATA_REQUESTED_USE_LATEST, { modelName: 'publicData', timeLimit: 10000 })
 								}
 							}}
-							label='Fetch Latest'
+							label='Fetch Storm! (Use Latest)'
 							primary={true} />
 						</div>
 					</div>
