@@ -1,7 +1,8 @@
 pages:
   stage: deploy
   script:
-  - yarn build
+  - npm install
+  - npm run build
   artifacts:
     paths:
     - build
