@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.jsonData {
-	text-align: left;
-	min-height: 395px;
-}
-
 .main {
 	margin: 2em;
 	border: 1px solid lightgray

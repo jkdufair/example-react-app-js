@@ -19,55 +19,60 @@ class Public extends Component {
 		const { publicData } = this.props
 		const { recurring } = this.state
 		return (
-			<div className='flex-container'>
-				<div id='left-panel'>
-					<div className='flex-vertical'>
-						<FlatButton
-							onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData' })}
-							label='Fetch'
-							primary={true} />
-						<FlatButton
-							onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', timeLimit: 10 })}
-							label='Fetch (10ms time limit)'
-							primary={true} />
-						<FlatButton
-							onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', queryParams: { baz: 'quux' } })}
-							label='Fetch with Query Param'
-							primary={true} />
-						<FlatButton
-							onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', queryParams: { foo: 'wawa' } })}
-							label='Fetch with Query Param Merged'
-							primary={true} />
-						{!recurring ?
-							<FlatButton
-								onClick={() => {
-									action(netActions.PERIODIC_DATA_REQUESTED, {	modelName: 'publicData',	taskId: 'abc', period: 500 })
-									this.setState({recurring: true})
-								}}
-								label='Fetch Recurring (500ms)'
-								primary={true} />
-							:
-							<FlatButton
-								onClick={() => {
-									action(netActions.PERIODIC_TERMINATION_REQUESTED, { taskId: 'abc' })
-									this.setState({recurring: false})
-								}}
-								label='Cancel Recurring'
-								secondary={true} />
-						}
+			<div id='main-container'>
+				<div id='action-panel'>
+					<FlatButton
+						onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData' })}
+						label='Fetch Public'
+						primary={true}
+						fullWidth={true} />
+					<FlatButton
+						onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', timeLimit: 10 })}
+						label='Fetch (10ms time limit)'
+						primary={true}
+						fullWidth={true} />
+					<FlatButton
+						onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', queryParams: { baz: 'quux' } })}
+						label='Fetch with Query Param'
+						primary={true}
+						fullWidth={true} />
+					<FlatButton
+						onClick={() => action(netActions.DATA_REQUESTED, { modelName: 'publicData', queryParams: { foo: 'wawa' } })}
+						label='Fetch with Param Merged'
+						primary={true}
+						fullWidth={true} />
+					{!recurring ?
 						<FlatButton
 							onClick={() => {
-								for (var i = 0; i < 100; i++) {
-									action(netActions.DATA_REQUESTED_USE_LATEST, { modelName: 'publicData', timeLimit: 10000 })
-								}
+								action(netActions.PERIODIC_DATA_REQUESTED, {	modelName: 'publicData',	taskId: 'abc', period: 500 })
+								this.setState({recurring: true})
 							}}
-							label='Fetch Storm! (Use Latest)'
-							primary={true} />
-						</div>
+							label='Fetch Recurring (500ms)'
+							primary={true}
+							fullWidth={true} />
+						:
+						<FlatButton
+							onClick={() => {
+								action(netActions.PERIODIC_TERMINATION_REQUESTED, { taskId: 'abc' })
+								this.setState({recurring: false})
+							}}
+							label='Cancel Recurring'
+							secondary={true}
+							fullWidth={true} />
+					}
+					<FlatButton
+						onClick={() => {
+							for (var i = 0; i < 100; i++) {
+								action(netActions.DATA_REQUESTED_USE_LATEST, { modelName: 'publicData', timeLimit: 10000 })
+							}
+						}}
+						label='Fetch Storm! (Use Latest)'
+						primary={true}
+						fullWidth={true} />
 					</div>
-				<div id='right-panel'>
+				<div id='results-panel'>
 					<Paper style={paperStyle} zDepth={3}>
-						<div className='jsonData'>
+						<div className='json-data'>
 							<pre>
 								{JSON.stringify(publicData, null, 2)}
 							</pre>

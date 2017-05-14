@@ -1,25 +1,29 @@
-.flex-container {
+#main-container {
 	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: stretch;
 	margin-top: 1rem;
-	margin-left: 1rem;
-	padding-bottom: 1rem;
 }
 
-#left-panel {
-	flex: 0 0 30%;
-}
-
-#right-panel {
-	flex: 0 0 70%;
-	padding-left: 1rem;
-	overflow: hidden;
-}
-
-#right-panel pre {
-	overflow: hidden;
-}
-
-.flex-vertical {
+#action-panel {
 	display: flex;
-	flex-direction: column;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex: 1 0 14.8rem;
+}
+
+#results-panel {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	text-align: left;
+	align-items: stretch;
+	flex: 999 0 auto;
+}
+
+.json-data {
+	max-width: 60vw;
+	min-width: 60vw;
 }

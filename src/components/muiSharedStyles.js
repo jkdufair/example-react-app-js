@@ -1,10 +1,11 @@
 const paperStyle = {
-	width: '95%',
-	maxWidth: '95%',
-	height: '98%',
 	paddingLeft: '1rem',
+	marginLeft: '1rem',
+	marginRight: '1rem',
   textAlign: 'left',
-  display: 'inline-block'
+  display: 'inline-block',
+	minHeight: '27rem',
+	overflow: 'scroll'
 };
 
 const padCircularProgress = {
