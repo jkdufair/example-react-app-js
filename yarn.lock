@@ -4967,18 +4967,18 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-"studiokit-auth-js@git+ssh://git@sprinklesthecat.ics.purdue.edu:studiokit-js/studiokit-auth-js.git#0.0.3":
-  version "0.0.3"
-  resolved "git+ssh://git@sprinklesthecat.ics.purdue.edu:studiokit-js/studiokit-auth-js.git#906537d4301b9b0a5a38cdf99f797a89467cea99"
+studiokit-auth-js@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/studiokit-auth-js/-/studiokit-auth-js-0.0.7.tgz#0e7c26a68b65c303b4c19b4092905fc31fc82dc2"
   dependencies:
     babel-plugin-transform-runtime "^6.23.0"
     babel-preset-env "^1.4.0"
     babel-runtime "^6.23.0"
     redux-saga "^0.15.1"
 
-"studiokit-net-js@git+ssh://git@github.com:purdue-tlt/studiokit-net-js.git#0.0.7":
-  version "0.0.7"
-  resolved "git+ssh://git@github.com:purdue-tlt/studiokit-net-js.git#023db0139125798ff9eeaa7bcd104d8b44afa185"
+studiokit-net-js@^0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/studiokit-net-js/-/studiokit-net-js-0.0.12.tgz#40819286926879a6476ea1f49a3b10151dca819c"
   dependencies:
     babel-plugin-transform-runtime "^6.23.0"
     babel-preset-env "^1.4.0"
