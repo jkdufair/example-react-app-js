@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card'
 import Snackbar from 'material-ui/Snackbar'
 import CircularProgress from 'material-ui/CircularProgress'
-import { action } from '../index'
+import { dispatchAction } from '../services/actionService'
 
 import './shared.css'
 import { paperStyle, padCircularProgress } from './muiSharedStyles'
@@ -49,7 +49,7 @@ class Authenticated extends Component {
 	}
 
 	getUserInfo() {
-		action(netActions.DATA_REQUESTED, { modelName: 'user.userInfo' })
+		dispatchAction(netActions.DATA_REQUESTED, { modelName: 'user.userInfo' })
 	}
 
 	handleInputChange(event) {
@@ -78,14 +78,15 @@ class Authenticated extends Component {
 						{auth.isAuthenticated
 							? <div>
 									<FlatButton
-										onClick={() => action(authActions.LOG_OUT_REQUESTED)}
+										onClick={() =>
+											dispatchAction(authActions.LOG_OUT_REQUESTED)}
 										label="Log Out"
 										primary={true}
 										fullWidth={true}
 									/>
 									<FlatButton
 										onClick={() =>
-											action(netActions.DATA_REQUESTED, {
+											dispatchAction(netActions.DATA_REQUESTED, {
 												modelName: 'user.calendarToken'
 											})}
 										label="Get Calendar Token"
@@ -94,7 +95,7 @@ class Authenticated extends Component {
 									/>
 									<FlatButton
 										onClick={() =>
-											action(netActions.DATA_REQUESTED, {
+											dispatchAction(netActions.DATA_REQUESTED, {
 												modelName: 'user.events'
 											})}
 										label="Get Calendar"
@@ -142,12 +143,15 @@ class Authenticated extends Component {
 													/>
 												: <FlatButton
 														onClick={() => {
-															action(authActions.HEADLESS_CAS_LOGIN_REQUESTED, {
-																payload: {
-																	Username: headlessCasUsername,
-																	Password: headlessCasPassword
+															dispatchAction(
+																authActions.HEADLESS_CAS_LOGIN_REQUESTED,
+																{
+																	payload: {
+																		Username: headlessCasUsername,
+																		Password: headlessCasPassword
+																	}
 																}
-															})
+															)
 															this.setState({ whichLoginButtonClicked: 'cas' })
 														}}
 														label="Log In"
@@ -182,12 +186,15 @@ class Authenticated extends Component {
 													/>
 												: <FlatButton
 														onClick={() => {
-															action(authActions.LOCAL_LOGIN_REQUESTED, {
-																payload: {
-																	Username: localUsername,
-																	Password: localPassword
+															dispatchAction(
+																authActions.LOCAL_LOGIN_REQUESTED,
+																{
+																	payload: {
+																		Username: localUsername,
+																		Password: localPassword
+																	}
 																}
-															})
+															)
 															this.setState({
 																whichLoginButtonClicked: 'local'
 															})
