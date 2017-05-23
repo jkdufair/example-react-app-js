@@ -76,12 +76,32 @@ class Authenticated extends Component {
 				<div id="main-container">
 					<div id="action-panel">
 						{auth.isAuthenticated
-							? <FlatButton
-									onClick={() => action(authActions.LOG_OUT_REQUESTED)}
-									label="Log Out"
-									primary={true}
-									fullWidth={true}
-								/>
+							? <div>
+									<FlatButton
+										onClick={() => action(authActions.LOG_OUT_REQUESTED)}
+										label="Log Out"
+										primary={true}
+										fullWidth={true}
+									/>
+									<FlatButton
+										onClick={() =>
+											action(netActions.DATA_REQUESTED, {
+												modelName: 'user.calendarToken'
+											})}
+										label="Get Calendar Token"
+										primary={true}
+										fullWidth={true}
+									/>
+									<FlatButton
+										onClick={() =>
+											action(netActions.DATA_REQUESTED, {
+												modelName: 'user.events'
+											})}
+										label="Get Calendar"
+										primary={true}
+										fullWidth={true}
+									/>
+								</div>
 							: <div>
 									<Card style={{ ...spacedCard, ...leftCard }}>
 										<CardHeader title="Standard CAS Login" />
