@@ -2,12 +2,12 @@ const key = 'oauthToken'
 
 const tokenPersistenceService = {
 	getPersistedToken: () => {
-		return JSON.parse(localStorage.getItem(key));
+		return JSON.parse(localStorage.getItem(key))
 	},
 
-	persistToken: (token) => {
+	persistToken: token => {
 		localStorage.setItem(key, JSON.stringify(token))
 	}
 }
 
-export { tokenPersistenceService };
+export { tokenPersistenceService }

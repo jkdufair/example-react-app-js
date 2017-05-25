@@ -29,12 +29,10 @@
 	},
 	"config": {
 		"pre-git": {
-			"commit-msg": "",
-			"pre-commit": [],
-			"pre-push": [],
-			"post-commit": [],
-			"post-checkout": [],
-			"post-merge": []
+			"commit-msg": "simple",
+			"pre-commit": [
+				"yarn prettier -- --print-width 120 --use-tabs --no-semi --single-quote --jsx-bracket-same-line --write 'src/**/*.js'"
+			]
 		}
 	}
 }

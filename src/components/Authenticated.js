@@ -78,8 +78,7 @@ class Authenticated extends Component {
 						{auth.isAuthenticated
 							? <div>
 									<FlatButton
-										onClick={() =>
-											dispatchAction(authActions.LOG_OUT_REQUESTED)}
+										onClick={() => dispatchAction(authActions.LOG_OUT_REQUESTED)}
 										label="Log Out"
 										primary={true}
 										fullWidth={true}
@@ -135,23 +134,16 @@ class Authenticated extends Component {
 											/>
 										</CardText>
 										<CardActions>
-											{auth.isAuthenticating &&
-												whichLoginButtonClicked === 'cas'
-												? <CircularProgress
-														size={30}
-														style={padCircularProgress}
-													/>
+											{auth.isAuthenticating && whichLoginButtonClicked === 'cas'
+												? <CircularProgress size={30} style={padCircularProgress} />
 												: <FlatButton
 														onClick={() => {
-															dispatchAction(
-																authActions.HEADLESS_CAS_LOGIN_REQUESTED,
-																{
-																	payload: {
-																		Username: headlessCasUsername,
-																		Password: headlessCasPassword
-																	}
+															dispatchAction(authActions.HEADLESS_CAS_LOGIN_REQUESTED, {
+																payload: {
+																	Username: headlessCasUsername,
+																	Password: headlessCasPassword
 																}
-															)
+															})
 															this.setState({ whichLoginButtonClicked: 'cas' })
 														}}
 														label="Log In"
@@ -178,23 +170,16 @@ class Authenticated extends Component {
 											/>
 										</CardText>
 										<CardActions>
-											{auth.isAuthenticating &&
-												whichLoginButtonClicked === 'local'
-												? <CircularProgress
-														size={30}
-														style={padCircularProgress}
-													/>
+											{auth.isAuthenticating && whichLoginButtonClicked === 'local'
+												? <CircularProgress size={30} style={padCircularProgress} />
 												: <FlatButton
 														onClick={() => {
-															dispatchAction(
-																authActions.LOCAL_LOGIN_REQUESTED,
-																{
-																	payload: {
-																		Username: localUsername,
-																		Password: localPassword
-																	}
+															dispatchAction(authActions.LOCAL_LOGIN_REQUESTED, {
+																payload: {
+																	Username: localUsername,
+																	Password: localPassword
 																}
-															)
+															})
 															this.setState({
 																whichLoginButtonClicked: 'local'
 															})
@@ -231,9 +216,7 @@ class Authenticated extends Component {
 const mapStateToProps = state => {
 	return {
 		auth: state.auth,
-		userInfo: state.models.user !== undefined
-			? state.models.user.userInfo
-			: undefined
+		userInfo: state.models.user !== undefined ? state.models.user.userInfo : undefined
 	}
 }
 
