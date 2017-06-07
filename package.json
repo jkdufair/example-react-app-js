@@ -13,7 +13,7 @@
 		"redux-devtools-extension": "^2.13.0",
 		"redux-saga": "^0.15.1",
 		"studiokit-auth-js": "^0.0.7",
-		"studiokit-net-js": "^0.0.12"
+		"studiokit-net-js": "^0.0.14"
 	},
 	"devDependencies": {
 		"pre-git": "^3.14.0",
